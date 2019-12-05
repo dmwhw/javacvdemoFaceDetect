@@ -16,4 +16,4 @@ public class JavaCVProcess {
         process.waitFor();
     }
 }
-//		mFrameGrabber.setVideoCodecName(HW_CODE);// h264_qsv
+//84424q		mFrameGrabber.setVideoCodecName(HW_CODE);// h264_qsv

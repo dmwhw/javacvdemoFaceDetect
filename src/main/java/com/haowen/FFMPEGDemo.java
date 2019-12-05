@@ -11,20 +11,20 @@ import org.bytedeco.javacv.FrameGrabber.Exception;
 
 public class FFMPEGDemo {
 	// rtsp://184.72.239.149/vod/mp4://BigBuckBunny_175k.mov
-	// rtsp://admin:2284424q@192.168.1.68:5100/h265/ch1/main/av_stream
-	static String path = "rtsp://admin:2284424q@192.168.1.68:5100/h265/ch1/main/av_stream";
-	static String path2 = "rtsp://admin:2284424q@192.168.1.68:5101/h265/ch1/main/av_stream";
-	static String path3 = "rtsp://admin:2284424q@192.168.1.68:5102/h265/ch1/main/av_stream";
-	static String path4 = "rtsp://admin:2284424q@192.168.1.68:5104/h265/ch1/main/av_stream";
-	static String path5 = "rtsp://admin:2284424q@192.168.1.68:5103/h265/ch1/main/av_stream";
+	// rtsp://admin:84424q@192.168.1.68:5100/h265/ch1/main/av_stream
+	static String path = "rtsp://admin:84424q@192.168.1.68:5100/h265/ch1/main/av_stream";
+	static String path2 = "rtsp://admin:84424q@192.168.1.68:5101/h265/ch1/main/av_stream";
+	static String path3 = "rtsp://admin:84424q@192.168.1.68:5102/h265/ch1/main/av_stream";
+	static String path4 = "rtsp://admin:84424q@192.168.1.68:5104/h265/ch1/main/av_stream";
+	static String path5 = "rtsp://admin:84424q@192.168.1.68:5103/h265/ch1/main/av_stream";
 
 	// static OpenCVFrameConverter.ToIplImage converter = new
 	// OpenCVFrameConverter.ToIplImage();
 	// ffmpeg -hwaccel qsv -c:v h264_qsv -i 1.MP4 -c:v h264_qsv -y 00.mp4
 	// .\ffmpeg.exe -rtsp_transport tcp
-	// rtsp://admin:2284424q@192.168.1.68:5100/MPEG-4/ch1/main/av_stream
+	// rtsp://admin:84424q@192.168.1.68:5100/MPEG-4/ch1/main/av_stream
 	// ffplay -hwaccel qsv tcp -c:v h264_qsv -rtsp_transport tcp
-	// rtsp://admin:2284424q@192.168.1.68:5100/MPEG-4/ch1/main/av_stream
+	// rtsp://admin:84424q@192.168.1.68:5100/MPEG-4/ch1/main/av_stream
 
 	// BufferedImage bi = (new Java2DFrameConverter()).getBufferedImage(f);
 	static int width = 200;
