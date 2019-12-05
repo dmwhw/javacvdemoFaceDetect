@@ -3,6 +3,7 @@
 dependency-reduced-pom.xml
 .settings
 /build
+/bin
 /src/test
 .classpath
 META-INF

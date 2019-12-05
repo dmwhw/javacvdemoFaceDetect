@@ -14,4 +14,6 @@ public class Smoother {
             imwrite(filename, image);
         }
     }
+    //		mFrameGrabber.setVideoCodecName(HW_CODE);//h264_qsv
+
 }
