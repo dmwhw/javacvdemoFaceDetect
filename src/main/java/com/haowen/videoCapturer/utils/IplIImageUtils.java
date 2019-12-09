@@ -1,4 +1,4 @@
-package com.haowen;
+package com.haowen.videoCapturer.utils;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -32,6 +32,7 @@ public class IplIImageUtils {
      * @exception:
      *
      */
+	@Deprecated
     public static BufferedImage iplToBufferedImage(IplImage iplImage) {
 	if (iplImage.height() > 0 && iplImage.width() > 0) {
  	    BytePointer imageData = iplImage.imageData();
@@ -59,7 +60,8 @@ public class IplIImageUtils {
      * @author:linghushaoxia
      * @exception:
      *
-     */
+     */	@Deprecated
+
     public static BufferedImage iplToBufImgData(IplImage mat) {
 	if (mat.height() > 0 && mat.width() > 0) {
 	    BufferedImage image = new BufferedImage(mat.width(), mat.height(),

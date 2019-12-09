@@ -1,8 +1,9 @@
 package com.haowen;
 
+import java.util.Date;
+
 import javax.swing.JFrame;
 
-import org.bytedeco.ffmpeg.avutil.AVDictionary;
 import org.bytedeco.ffmpeg.global.avutil;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
@@ -12,11 +13,11 @@ import org.bytedeco.javacv.FrameGrabber.Exception;
 public class FFMPEGDemo {
 	// rtsp://184.72.239.149/vod/mp4://BigBuckBunny_175k.mov
 	// rtsp://admin:84424q@192.168.1.68:5100/h265/ch1/main/av_stream
-	static String path = "rtsp://admin:84424q@192.168.1.68:5100/h265/ch1/main/av_stream";
-	static String path2 = "rtsp://admin:84424q@192.168.1.68:5101/h265/ch1/main/av_stream";
-	static String path3 = "rtsp://admin:84424q@192.168.1.68:5102/h265/ch1/main/av_stream";
-	static String path4 = "rtsp://admin:84424q@192.168.1.68:5104/h265/ch1/main/av_stream";
-	static String path5 = "rtsp://admin:84424q@192.168.1.68:5103/h265/ch1/main/av_stream";
+	static String path = "rtsp://admin:2284424q@192.168.1.68:5100/h265/ch1/main/av_stream";
+	static String path2 = "rtsp://admin:2284424q@192.168.1.68:5101/h265/ch1/main/av_stream";
+	static String path3 = "rtsp://admin:2284424q@192.168.1.68:5102/h265/ch1/main/av_stream";
+	static String path4 = "rtsp://admin:2284424q@192.168.1.68:5104/h265/ch1/main/av_stream";
+	static String path5 = "rtsp://admin:2284424q@192.168.1.68:5103/h265/ch1/main/av_stream";
 
 	// static OpenCVFrameConverter.ToIplImage converter = new
 	// OpenCVFrameConverter.ToIplImage();
@@ -47,7 +48,6 @@ public class FFMPEGDemo {
 		mFrameGrabber.setOption("buffer_size", "1024000");// 提高画质，减少花屏现象
 		mFrameGrabber.setVideoOption("preset", "ultrafast");
 		mFrameGrabber.setVideoOption("hwaccel", HWACCEL);
-		mFrameGrabber.setVideoOption("c:v", HW_CODE);
 		mFrameGrabber.setImageWidth(800);
 		mFrameGrabber.setImageHeight(600);
 		mFrameGrabber.setVideoCodecName(HW_CODE);// h264_qsv
@@ -90,7 +90,7 @@ public class FFMPEGDemo {
 						}
 						Frame frame = mFrameGrabber.grab();
 						while ((frame == null)) {
-							System.out.println("stop....");
+							System.err.println("stop....");
 							mFrameGrabber.close();
 							mFrameGrabber = getFFmpegFrameGrabber(path);
 							mFrameGrabber.start();
@@ -100,6 +100,7 @@ public class FFMPEGDemo {
 						canvas.showImage(frame);// 获取摄像头图像并放到窗口上显示， 这里的Frame
 												// frame=grabber.grab();
 												// frame是一帧视频图像
+						System.out.println(Thread.currentThread().getName()+"-"+new Date( frame.timestamp));
 
 						// Thread.sleep(800);//50毫秒刷新一次图像
 					}
