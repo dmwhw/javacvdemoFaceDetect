@@ -1,6 +1,7 @@
 package com.haowen;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
@@ -19,6 +20,8 @@ public class FFMPEGDemo {
 	static String path4 = "rtsp://admin:2284424q@192.168.1.68:5104/h265/ch1/main/av_stream";
 	static String path5 = "rtsp://admin:2284424q@192.168.1.68:5103/h265/ch1/main/av_stream";
 
+	// ffprobe source//test for encode
+	// ffmpeg -hwaccels
 	// static OpenCVFrameConverter.ToIplImage converter = new
 	// OpenCVFrameConverter.ToIplImage();
 	// ffmpeg -hwaccel qsv -c:v h264_qsv -i 1.MP4 -c:v h264_qsv -y 00.mp4
@@ -52,6 +55,8 @@ public class FFMPEGDemo {
 		mFrameGrabber.setImageHeight(600);
 		mFrameGrabber.setVideoCodecName(HW_CODE);// h264_qsv
 		// mFrameGrabber.start();
+		mFrameGrabber.setVideoTimestamp(System.currentTimeMillis());
+
 		return mFrameGrabber;
 
 	}
@@ -60,10 +65,10 @@ public class FFMPEGDemo {
 	public static void main(String[] args) throws Exception, InterruptedException {
 
 		openPath(path);
-		openPath(path2);
-		openPath(path3);
-		openPath(path4);
-		openPath(path5);
+		// openPath(path2);
+		// openPath(path3);
+		// openPath(path4);
+		// openPath(path5);
 
 	}
 
@@ -74,14 +79,16 @@ public class FFMPEGDemo {
 					FFmpegFrameGrabber mFrameGrabber = getFFmpegFrameGrabber(path);
 					// 上面的代码表示我们可以像ijkplayer一样，设置一些参数，这些参数格式我们可以参考ijkplayer也可以去ffmpeg命令行的一些设置参数文档里面去查找，这里就不多赘述了。
 					avutil.av_log_set_level(avutil.AV_LOG_ERROR);
- 					// int avformat_open_input(AVFormatContext **ps, const char
+					// int avformat_open_input(AVFormatContext **ps, const char
 					// *url, AVInputFormat *fmt, AVDictionary **options);
 					mFrameGrabber.start();
 					CanvasFrame canvas = new CanvasFrame("摄像头");// 新建一个窗口
 					canvas.setBounds(0, 0, width, height);
 					canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					canvas.setAlwaysOnTop(false);
- 
+
+					Map<String, String> metadata = mFrameGrabber.getMetadata();
+					System.out.println(metadata);
 					while (true) {
 						if (!canvas.isDisplayable()) {// 窗口是否关闭
 							mFrameGrabber.stop();// 停止抓取
@@ -97,10 +104,14 @@ public class FFMPEGDemo {
 							frame = mFrameGrabber.grab();
 							// 重连
 						}
+						double videoFrameRate = mFrameGrabber.getVideoFrameRate();
+
 						canvas.showImage(frame);// 获取摄像头图像并放到窗口上显示， 这里的Frame
 												// frame=grabber.grab();
 												// frame是一帧视频图像
-						System.out.println(Thread.currentThread().getName()+"-"+new Date( frame.timestamp));
+						System.out.println(Thread.currentThread().getName() + "-" + new Date(frame.timestamp));
+
+						// System.out.println(videoFrameRate);
 
 						// Thread.sleep(800);//50毫秒刷新一次图像
 					}
